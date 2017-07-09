@@ -17,7 +17,7 @@
                         	<div class="form-top">
                         		<div class="form-top-left">
                         			<h3>Get Started Now</h3>
-                            		Fill in the form below to get instant access
+                            		<p>Fill in the form below to get instant access</p>
                         		</div>
                             </div>
                             <div class="form-bottom">
@@ -57,7 +57,7 @@
                 <h1><strong>Latest Remote Jobs</strong></h1>
             </div>
             <% @data[:latest_jobs].each do |job| %>
-            <div class="wow fadeInUp always-beautiful-box-text">
+            <div class="fadeInUp always-beautiful-box-text">
                 <div class="row">
                     <a href="#" class="launch-modal" data-modal-id="modal-job-<%= job.job_id %>"><h2><%= job.job_title %></h2></a>
                 </div>
@@ -76,8 +76,11 @@
                 </div>
             </div>
             <% end %>
-            <div class="row wow fadeInUp">
-                <a class="btn btn-link-1" href="/jobs">Show More</a>
+            <div class="row fadeInUp">
+                <h3>
+                    Show more
+                    <a class="" href="/jobs">→</a>
+                </h3>
             </div>
         </div>
         
