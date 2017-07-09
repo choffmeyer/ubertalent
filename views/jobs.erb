@@ -6,7 +6,7 @@
 
             <!-- Jobs List -->
             <% @data[:latest_jobs_paged][@page_n - 1].each do |job| %>
-            <div class="wow always-beautiful-box-text">
+            <div class="always-beautiful-box-text">
                 <div class="row">
                     <a href="#" class="launch-modal" data-modal-id="modal-job-<%= job.job_id %>"><h2><%= job.job_title %></h2></a>
                 </div>
@@ -27,7 +27,7 @@
             <% end %>
 
             <!-- Jobs Pagination -->
-            <div class="row wow">
+            <div class="row">
                 <h3>
                 <% if @page_n > 1 %>
                   <a class="" href="/jobs?page=<%= @page_n - 1 %>">←</a>
