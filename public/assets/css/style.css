@@ -283,7 +283,7 @@ ul.navbar-nav {
 	overflow: hidden;
 	padding: 0 25px 15px 25px;
 	background: #444;
-	background: rgba(0, 0, 0, 0.35);
+	background: rgba(0, 0, 0, 0.85);
 	text-align: left;
 }
 
@@ -310,7 +310,7 @@ ul.navbar-nav {
 .form-bottom {
 	padding: 25px 25px 30px 25px;
 	background: #444;
-	background: rgba(0, 0, 0, 0.3);
+	background: rgba(0, 0, 0, 0.85);
 	text-align: left;
 }
 

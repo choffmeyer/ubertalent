@@ -19,9 +19,7 @@
                     <%= job.job_location %>
                 </div>
                 <div class="row">
-                    <a href="<%= job.job_url %>">Apply now</a>
-                    or
-                    <a href="#" class="launch-modal" data-modal-id="modal-job-<%= job.job_id %>">view details</a>   
+                    <a href="#" class="launch-modal" data-modal-id="modal-job-<%= job.job_id %>">Open ❏︎</a>
                 </div>
             </div>
             <% end %>
@@ -52,6 +50,7 @@
                     <%= job.job_description %>
                     </div>
                     <div class="modal-footer">
+                        <a class="btn btn-link-1" target="_blank" href="<%= job.job_url %>">Go to Job Board</a>
                         <button type="button" class="btn" data-dismiss="modal">Close</button>
                     </div>
                 </div>
