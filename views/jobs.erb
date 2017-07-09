@@ -4,8 +4,17 @@
                 <h1><strong>Latest Remote Jobs</strong></h1>
             </div>
 
+            <div class="row">
+                <form role="form" action="" method="get">
+                    <h3>
+                    Showing results for
+                    <input type="text" name="query" placeholder="All Jobs" class="" value="<%= @query %>" autofocus>
+                    </h3>
+                </form>
+            </div>
+
             <!-- Jobs List -->
-            <% @data[:latest_jobs_paged][@page_n - 1].each do |job| %>
+            <% @data[:latest_jobs_paged][@current_page - 1].each do |job| %>
             <div class="always-beautiful-box-text">
                 <div class="row">
                     <a href="#" class="launch-modal" data-modal-id="modal-job-<%= job.job_id %>"><h2><%= job.job_title %></h2></a>
@@ -15,7 +24,7 @@
                     <%= job.job_company %>
                 </div>
                 <div class="row">
-                    <strong>Location: </strong>
+                    <strong>Headquarters: </strong>
                     <%= job.job_location %>
                 </div>
                 <div class="row">
@@ -27,19 +36,19 @@
             <!-- Jobs Pagination -->
             <div class="row">
                 <h3>
-                <% if @page_n > 1 %>
-                  <a class="" href="/jobs?page=<%= @page_n - 1 %>">←</a>
+                <% if @current_page > 1 %>
+                  <a class="" href="<%= add_page_to_fullpath(@current_page - 1, request.fullpath) %>">←</a>
                 <% end %>
-                Page <%= @page_n %>
-                <% if @page_n < @data[:latest_jobs_paged].size %>
-                  <a class="" href="/jobs?page=<%= @page_n + 1 %>">→</a>
+                Page <%= "#{@current_page}/#{@total_pages}" %>
+                <% if @current_page < @total_pages %>
+                  <a class="" href="<%= add_page_to_fullpath(@current_page + 1, request.fullpath) %>">→</a>
                 <% end %>
                 </h3>
             </div>
         </div>
 
         <!-- MODAL: Job Description -->
-        <% @data[:latest_jobs_paged][@page_n - 1].each do |job| %>
+        <% @data[:latest_jobs_paged][@current_page - 1].each do |job| %>
         <div class="modal fade" id="modal-job-<%= job.job_id %>" tabindex="-1" role="dialog" aria-labelledby="modal-job-<%= job.job_id %>-label" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
