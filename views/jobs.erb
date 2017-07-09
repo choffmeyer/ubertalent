@@ -1,0 +1,60 @@
+        <!-- Jobs -->
+        <div class="section-container">
+	        <div class="row">
+                <h1><strong>Latest Remote Jobs</strong></h1>
+            </div>
+
+            <!-- Jobs List -->
+            <% @data[:latest_jobs_paged][@page_n - 1].each do |job| %>
+            <div class="wow always-beautiful-box-text">
+                <div class="row">
+                    <a href="#" class="launch-modal" data-modal-id="modal-job-<%= job.job_id %>"><h2><%= job.job_title %></h2></a>
+                </div>
+                <div class="row">
+                    <strong>Company: </strong>
+                    <%= job.job_company %>
+                </div>
+                <div class="row">
+                    <strong>Location: </strong>
+                    <%= job.job_location %>
+                </div>
+                <div class="row">
+                    <a href="<%= job.job_url %>">Apply now</a>
+                    or
+                    <a href="#" class="launch-modal" data-modal-id="modal-job-<%= job.job_id %>">view details</a>   
+                </div>
+            </div>
+            <% end %>
+
+            <!-- Jobs Pagination -->
+            <div class="row wow">
+                <h3>
+                <% if @page_n > 1 %>
+                  <a class="" href="/jobs?page=<%= @page_n - 1 %>">←</a>
+                <% end %>
+                Page <%= @page_n %>
+                <% if @page_n < @data[:latest_jobs_paged].size %>
+                  <a class="" href="/jobs?page=<%= @page_n + 1 %>">→</a>
+                <% end %>
+                </h3>
+            </div>
+        </div>
+
+        <!-- MODAL: Job Description -->
+        <% @data[:latest_jobs_paged][@page_n - 1].each do |job| %>
+        <div class="modal fade" id="modal-job-<%= job.job_id %>" tabindex="-1" role="dialog" aria-labelledby="modal-job-<%= job.job_id %>-label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="modal-job-<%= job.job_id %>-label"><%= job.job_title %></h2>
+                    </div>
+                    <div class="modal-body">
+                    <%= job.job_description %>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% end %>

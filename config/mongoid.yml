@@ -1,0 +1,8 @@
+production:
+  clients:
+    default:
+      uri: <%= ENV['MONGODB_URI'] %>
+development:
+  clients:
+    default:
+      uri: 'mongodb://localhost/heroku_86x9vvbp'

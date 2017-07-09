@@ -1,0 +1,189 @@
+		<!-- Top content -->
+        <div class="top-content">
+            <div class="inner-bg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-7 text">
+                            <h1 class="wow fadeInLeftBig"><strong>Find your next gig in 1 Month</strong></h1>
+                            <div class="description wow fadeInLeftBig">
+                            	<p>
+	                            	Your next digital remote job is here. We have scoured the web to bring you the best freelance, telecommute jobs and gigs available. 
+	                            	No cost, no commitment, no worries.
+                            	</p>
+                            </div>
+                           
+                        </div>
+                        <div class="col-sm-5 form-box wow fadeInUp">
+                        	<div class="form-top">
+                        		<div class="form-top-left">
+                        			<h3>Get Started Now</h3>
+                            		Fill in the form below to get instant access
+                        		</div>
+                            </div>
+                            <div class="form-bottom">
+			                    <form role="form" action="" method="post">
+			                    	<div class="form-group">
+			                    		<label class="sr-only" for="form-first-name">First name</label>
+			                        	<input type="text" name="form-first-name" placeholder="First name" class="form-first-name form-control" id="form-first-name">
+			                        </div>
+			                        <div class="form-group">
+			                        	<label class="sr-only" for="form-last-name">Last name</label>
+			                        	<input type="text" name="form-last-name" placeholder="Last name" class="form-last-name form-control" id="form-last-name">
+			                        </div>
+			                        <div class="form-group">
+			                        	<label class="sr-only" for="form-email">Email</label>
+			                        	<input type="text" name="form-email" placeholder="Your email" class="form-email form-control" id="form-email">
+			                        </div>
+			                        <div class="form-group">
+			                        	<label class="sr-only" for="form-about-yourself">How</label>
+			                        	<textarea name="form-about-yourself" placeholder="Tell us about yourself" 
+			                        				class="form-about-yourself form-control" id="form-about-yourself"></textarea>
+			                        </div>
+			                        <button type="submit" class="btn">Sign me up</button>
+                                    <a href="#" class="btn btn-link-2 launch-modal" data-modal-id="modal-faq">Frequent questions</a>
+
+			                    </form>
+		                    </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        
+       
+        <!-- Jobs -->
+        <div class="section-container">
+	        <div class="row">
+                <h1><strong>Latest Remote Jobs</strong></h1>
+            </div>
+            <% @data[:latest_jobs].each do |job| %>
+            <div class="wow fadeInUp always-beautiful-box-text">
+                <div class="row">
+                    <a href="#" class="launch-modal" data-modal-id="modal-job-<%= job.job_id %>"><h2><%= job.job_title %></h2></a>
+                </div>
+                <div class="row">
+                    <strong>Company: </strong>
+                    <%= job.job_company %>
+                </div>
+                <div class="row">
+                    <strong>Location: </strong>
+                    <%= job.job_location %>
+                </div>
+                <div class="row">
+                    <a href="<%= job.job_url %>">Apply now</a>
+                    or
+                    <a href="#" class="launch-modal" data-modal-id="modal-job-<%= job.job_id %>">view details</a>   
+                </div>
+            </div>
+            <% end %>
+            <div class="row wow fadeInUp">
+                <a class="btn btn-link-1" href="/jobs">Show More</a>
+            </div>
+        </div>
+        
+        <!-- MODAL: Privacy policy -->
+        <div class="modal fade" id="modal-privacy" tabindex="-1" role="dialog" aria-labelledby="modal-privacy-label" aria-hidden="true">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal">
+        					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        				</button>
+        				<h2 class="modal-title" id="modal-privacy-label">Privacy policy</h2>
+        			</div>
+        			<div class="modal-body">
+        				<h3>1. Dolor sit amet</h3>
+        				<p>
+	                    	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
+	                    	labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+	                    </p>
+	                    <ul>
+	                    	<li>Easy To Use</li>
+	                    	<li>Awesome Design</li>
+	                    	<li>Cloud Based</li>
+	                    </ul>
+	                    <p>
+	                    	Ut wisi enim ad minim veniam, <a href="#">quis nostrud exerci tation</a> ullamcorper suscipit lobortis nisl ut aliquip ex ea 
+	                    	commodo consequat nostrud tation.
+	                    </p>
+	                    <h3>2. Sed do eiusmod</h3>
+	                    <p>
+	                    	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
+	                    	labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+	                    </p>
+	                    <h3>3. Nostrud exerci tation</h3>
+	                    <p>
+	                    	Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea 
+	                    	commodo consequat nostrud tation.
+	                    </p>
+	                    <p>
+	                    	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut 
+	                    	labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
+	                    </p>
+        			</div>
+        			<div class="modal-footer">
+        				<button type="button" class="btn" data-dismiss="modal">Close</button>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+        
+        <!-- MODAL: Frequent questions -->
+        <div class="modal fade" id="modal-faq" tabindex="-1" role="dialog" aria-labelledby="modal-faq-label" aria-hidden="true">
+        	<div class="modal-dialog">
+        		<div class="modal-content">
+        			<div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal">
+        					<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        				</button>
+        				<h2 class="modal-title" id="modal-faq-label">Frequent questions</h2>
+        			</div>
+        			<div class="modal-body">
+        				<h3>1. What do I get by signing up?</h3>
+        				<p>
+	                    	You will receive weekly emails with the most relevant freelance jobs from the web. Our team scours the web so you don't have to. With the weekly job emails, you will also receive freelancer tools for financial planning, marketing, and tips on how to work with small and large companies.
+	                    </p>
+	                    <h3>2. Do you have an example of your freelancer tools?</h3>
+	                    <p>
+	                    	Yes, just sign-up and you will see examples immediately.
+	                    </p>
+	                    <h3>3. Who relies on UberTalent?</h3>
+	                    <p>
+	                    	Thousands of freelancers and digital nomads use UberTalent to find their next project. We routinely highlight up and coming companies that are hiring and searching for digital talent.
+	                    </p>
+	                    <h3>4. Do you accept job posts?</h3>
+	                    <p>
+	                    	We do highlight companies who are hiring. Please contact us directly at sales@ubertalent.io to get more information.
+	                    </p>
+	                    <h3>5. What are digital nomads and freelance gigs?</h3>
+	                    <p>
+	                    	First, we curate only the best digital jobs. We ignore and do not include most "work at home" jobs, since most are usually garbage. Instead, we find digital jobs for designers, writers, developers, and other freelancers building their careers.
+	                    	Second, the freelance gigs that you see may be posted from the company, recruiter, or a marketplace. Each has it's merits but we sort out the best opportunities for you. 
+	                    </p>
+        			</div>
+        			<div class="modal-footer">
+        				<button type="button" class="btn" data-dismiss="modal">Close</button>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+
+
+        <!-- MODAL: Job Description -->
+        <% @data[:latest_jobs].each do |job| %>
+        <div class="modal fade" id="modal-job-<%= job.job_id %>" tabindex="-1" role="dialog" aria-labelledby="modal-job-<%= job.job_id %>-label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title" id="modal-job-<%= job.job_id %>-label"><%= job.job_title %></h2>
+                    </div>
+                    <div class="modal-body">
+                    <%= job.job_description %>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% end %>
