@@ -1,16 +1,11 @@
+$.fn.scrollTo = function (speed) {
+    if (typeof(speed) === 'undefined')
+        speed = 1000;
 
-function scroll_to(clicked_link, nav_height) {
-	var element_class = clicked_link.attr('href').replace('#', '.');
-	var scroll_to = 0;
-	if(element_class != '.top-content') {
-		element_class += '-container';
-		scroll_to = $(element_class).offset().top - nav_height;
-	}
-	if($(window).scrollTop() != scroll_to) {
-		$('html, body').stop().animate({scrollTop: scroll_to}, 1000);
-	}
-}
-
+    $('html, body').animate({
+        scrollTop: parseInt($(this).offset().top)
+    }, speed);
+};
 
 jQuery(document).ready(function() {
 	
@@ -19,7 +14,7 @@ jQuery(document).ready(function() {
 	*/
 	$('a.scroll-link').on('click', function(e) {
 		e.preventDefault();
-		scroll_to($(this), 0);
+		$($(this).attr('href')).scrollTo(700);
 	});	
 	
     /*
@@ -38,7 +33,6 @@ jQuery(document).ready(function() {
     
     /*
         Wow
-    */
     new WOW().init();
     
 	/*

@@ -49,7 +49,8 @@ https://authenticjobs.com/
 
 ### Local installation
 Ensure you have installed ruby 2.4.0.
-Run terminal, go to this directory and type following commands:
+
+Run terminal and type following commands:
 ```
 $ gem install bundler
 $ bundle install
@@ -58,6 +59,7 @@ $ foreman start
 ```
 
 ### Heroku installation
+Add heroku remote and run:
 ```
-git push heroku master
+$ git push heroku master
 ```

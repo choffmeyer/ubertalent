@@ -724,6 +724,7 @@ footer {
 
 
 /***** CUSTOM: Job page *****/
+
 select.jobs_filter,
 input[type="text"].jobs_filter {
 	outline: 0;
@@ -732,4 +733,10 @@ input[type="text"].jobs_filter {
 	background: #fff;
     border: 3px solid #42bfc2;
     -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+}
+
+a#arrow_to_jobs {
+	font-size: 4em;
+    color: #fff;
+    opacity: 0.8;
 }
