@@ -1,0 +1,2 @@
+:api_key: <%= ENV['MAILCHIMP_APIKEY'] %>
+:list_id: <%= ENV['MAILCHIMP_LISTID'] %>

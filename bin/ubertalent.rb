@@ -5,15 +5,19 @@ $: << File.expand_path('../', File.dirname(__FILE__))
 
 require 'sinatra'
 require 'puma'
+require 'gibbon'
+require 'yaml'
 require './db/mongo.rb'
 
 #### Initialization
 
 configure do
   $stdout.sync = true
+  enable :sessions
   set :server,        'puma'
   set :views,         './views'
   set :public_folder, './public'
+  set :mailchimp,     YAML.load(ERB.new(File.read './config/mailchimp.yml').result)
 end
 
 #### Helpers
@@ -45,6 +49,14 @@ helpers do
     fullpath = fullpath + '?' unless fullpath.include? '?'
     fullpath = fullpath.sub(/&page=\d+/, '') + "&page=#{page_number}"
   end
+
+  def add_subscriber(email, fname, lname, summary)
+    Gibbon::Request.new(api_key: settings.mailchimp[:api_key]).lists(settings.mailchimp[:list_id]).members.create(body: {email_address: email, status: "subscribed", merge_fields: {FNAME: fname, LNAME: lname, SUMMARY: summary}})
+  rescue Gibbon::MailChimpError => e
+    {status: e.status_code, details: e.title}
+  else
+    {status: 200}
+  end
 end
 
 #### Routes
@@ -52,6 +64,25 @@ end
 get '/' do
   @data = index_page_data
   erb :index
+end
+
+post '/' do
+  response = add_subscriber(params['form-email'], params['form-first-name'], params['form-last-name'], params['form-about-yourself'])
+  if response[:status] == 200
+    redirect "/thank_you"
+  else
+    session[:mailchimp_response] = response
+    redirect "/error"
+  end
+end
+
+get '/error' do
+  @mailchimp_response = session[:mailchimp_response]
+  erb :error
+end
+
+get '/thank_you' do
+  erb 'thank_you'.to_sym
 end
 
 get '/jobs' do

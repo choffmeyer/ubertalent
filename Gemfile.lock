@@ -10,6 +10,11 @@ GEM
       tzinfo (~> 1.1)
     bson (4.2.2)
     concurrent-ruby (1.0.5)
+    faraday (0.12.1)
+      multipart-post (>= 1.2, < 3)
+    gibbon (3.0.2)
+      faraday (>= 0.9.1)
+      multi_json (>= 1.11.0)
     i18n (0.8.5)
     minitest (5.10.2)
     mongo (2.4.2)
@@ -17,6 +22,8 @@ GEM
     mongoid (6.2.0)
       activemodel (~> 5.1)
       mongo (>= 2.4.1, < 3.0.0)
+    multi_json (1.12.1)
+    multipart-post (2.0.0)
     mustermann (1.0.0)
     puma (3.8.2)
     rack (2.0.3)
@@ -36,6 +43,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  gibbon
   mongoid
   puma
   sinatra
