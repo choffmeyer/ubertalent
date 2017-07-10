@@ -18,6 +18,7 @@ class Job
   field :remote, type: String
   field :tags, type: String
   field :source, type: String
+  field :category, type: String
 
   validates_uniqueness_of :job_id
 end

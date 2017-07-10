@@ -25,15 +25,19 @@ helpers do
     }
   end
 
-  def jobs_page_data
+  def jobs_page_data(title: '', category: '')
+    if title.empty? && category.empty?
+      jobs_paged = Job.where(published: 'true').desc('_id').to_a.each_slice(20).to_a
+    elsif category.empty?
+      jobs_paged = Job.where(published: 'true').where(job_title: /#{title}/i).desc('_id').to_a.each_slice(20).to_a
+    elsif title.empty?
+      jobs_paged = Job.where(published: 'true').where(category: category).desc('_id').to_a.each_slice(20).to_a
+    else
+      jobs_paged = Job.where(published: 'true').where(job_title: /#{title}/i, category: category).desc('_id').to_a.each_slice(20).to_a
+    end
     {
-      latest_jobs_paged: Job.where(published: 'true').desc('_id').to_a.each_slice(20).to_a
-    }
-  end
-
-  def jobs_page_data_filtered(title: nil)
-    {
-      latest_jobs_paged: Job.where(published: 'true').where(job_title: /#{title}/i).desc('_id').to_a.each_slice(20).to_a
+      jobs_paged: jobs_paged,
+      categories: Job.where(published: 'true').distinct(:category).to_a
     }
   end
 
@@ -52,9 +56,10 @@ end
 
 get '/jobs' do
   @query        = params[:query].to_s
-  @data         = (@query.empty? ? jobs_page_data : jobs_page_data_filtered(title: @query))
+  @category     = params[:category].to_s
+  @data         = jobs_page_data(title: @query, category: @category)
   @current_page = (params[:page] ? params[:page] : 1).to_i
-  @total_pages  = @data[:latest_jobs_paged].size
+  @total_pages  = @data[:jobs_paged].size
   pass if @current_page < 1
   pass if @current_page > @total_pages
   erb :jobs
