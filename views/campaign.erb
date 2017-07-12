@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+   	<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>UberTalent — Find Your Freelance Job</title>
+    </head>
+    <body>
+    	<h1>
+    		Latest Jobs in <%= @data[:category] %>
+    	</h1>
+    	<% @data[:jobs].each do |job| %>
+            <div>
+                <div>
+                    <h2><%= job.job_title %></h2>
+                </div>
+                <div>
+                    <strong>Company: </strong>
+                    <%= job.job_company %>
+                </div>
+                <div>
+                    <strong>Headquarters: </strong>
+                    <%= job.job_location %>
+                </div>
+                <div>
+                    <a href="/job?id=<%= job.id %>">Open</a>
+                </div>
+                <br>
+            </div>
+        <% end %>
+    	<footer>
+    		<br>
+    		<hr>
+    		<a href="http://ubertalent.io/">ubertalent.io</a>
+    	</footer>
+    </body>
+</html>

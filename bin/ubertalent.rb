@@ -45,6 +45,25 @@ helpers do
     }
   end
 
+  def job_page_data(id: nil)
+    {
+      job: Job.where(id: id).to_a.first
+    }
+  end
+
+  def campaign_page_data(category: '')
+    if category.empty?
+      jobs = Job.where(published: 'true').desc('_id')[0..9]
+      category = 'All Categories'
+    else
+      jobs = Job.where(published: 'true').where(category: category).desc('_id')[0..9]
+    end
+    {
+      jobs: jobs,
+      category: category
+    }
+  end
+
   def add_page_to_fullpath(page_number, fullpath)
     fullpath = fullpath + '?' unless fullpath.include? '?'
     fullpath = fullpath.sub(/&page=\d+/, '') + "&page=#{page_number}"
@@ -96,6 +115,19 @@ get '/jobs' do
   erb :jobs
 end
 
+get '/job' do
+  id = params[:id].to_s
+  pass if id.empty?
+  @data = job_page_data(id: id)
+  erb :job
+end
+
+get '/campaign' do
+  @category = params[:category].to_s
+  @data     = campaign_page_data(category: @category)
+  erb :campaign, :layout => false
+end
+
 not_found do
-  erb 404.to_s.to_sym
+  erb '404'.to_sym
 end
