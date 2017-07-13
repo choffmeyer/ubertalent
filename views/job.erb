@@ -5,7 +5,8 @@
                         <h2 class="modal-title" id="modal-job-<%= job.job_id %>-label"><%= job.job_title %></h2>
                     </div>
                     <div class="modal-body">
-                    <%= job.job_description %>
+                    <!-- Displaying job description without URL: block -->
+                    <%= job.job_description.sub(/\<strong\>URL:.+\<\/a\>/, '').sub(/\<strong\>URL:.+?\<\/p\>/m, '</p>') %>
                     </div>
                     <div class="modal-footer">
                         <a class="btn btn-link-1" target="_blank" href="<%= job.job_url %>">Go to Job Board</a>
