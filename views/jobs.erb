@@ -10,12 +10,6 @@
                     <h3>
                     Showing results for
                     <input type="text" name="query" placeholder="All Jobs" class="jobs_filter" value="<%= @query %>" autofocus>
-                    in
-                    <select name="category" class="jobs_filter">
-                        <option value="">All Categories</option>
-                        <% @data[:categories].each do |category| %>
-                        <option value="<%= category %>"><%= category.capitalize %></option>
-                        <% end %>
                     </select>
                     <button type="submit" class="btn">Apply</button>
                     </h3>

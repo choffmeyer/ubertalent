@@ -29,19 +29,14 @@ helpers do
     }
   end
 
-  def jobs_page_data(title: '', category: '')
-    if title.empty? && category.empty?
+  def jobs_page_data(title: '')
+    if title.empty?
       jobs_paged = Job.where(published: 'true').desc('_id').to_a.each_slice(20).to_a
-    elsif category.empty?
-      jobs_paged = Job.where(published: 'true').where(job_title: /#{title}/i).desc('_id').to_a.each_slice(20).to_a
-    elsif title.empty?
-      jobs_paged = Job.where(published: 'true').where(category: category).desc('_id').to_a.each_slice(20).to_a
     else
-      jobs_paged = Job.where(published: 'true').where(job_title: /#{title}/i, category: category).desc('_id').to_a.each_slice(20).to_a
+      jobs_paged = Job.where(published: 'true').where(job_title: /#{title}/i).desc('_id').to_a.each_slice(20).to_a
     end
     {
-      jobs_paged: jobs_paged,
-      categories: Job.where(published: 'true').distinct(:category).to_a
+      jobs_paged: jobs_paged
     }
   end
 
@@ -51,16 +46,9 @@ helpers do
     }
   end
 
-  def campaign_page_data(category: '')
-    if category.empty?
-      jobs = Job.where(published: 'true').desc('_id')[0..9]
-      category = 'All Categories'
-    else
-      jobs = Job.where(published: 'true').where(category: category).desc('_id')[0..9]
-    end
+  def campaign_page_data
     {
-      jobs: jobs,
-      category: category
+      jobs: Job.where(published: 'true').desc('_id')[0..9]
     }
   end
 
@@ -106,8 +94,7 @@ end
 
 get '/jobs' do
   @query        = params[:query].to_s
-  @category     = params[:category].to_s
-  @data         = jobs_page_data(title: @query, category: @category)
+  @data         = jobs_page_data(title: @query)
   @current_page = (params[:page] ? params[:page] : 1).to_i
   @total_pages  = @data[:jobs_paged].size
   pass if @current_page < 1
@@ -123,8 +110,7 @@ get '/job' do
 end
 
 get '/campaign' do
-  @category = params[:category].to_s
-  @data     = campaign_page_data(category: @category)
+  @data = campaign_page_data
   erb :campaign, :layout => false
 end
 
